@@ -42,11 +42,66 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
-////
+ChatBot::ChatBot(const ChatBot& other)
+{
+  std::cout << "ChatBot Copy Constructor" << std::endl;
 
-////
-//// EOF STUDENT CODE
+  _chatLogic = other._chatLogic;
+  _rootNode = other._rootNode;
+
+  if(_image != NULL)
+  {
+    *_image = *other._image;
+  }
+}
+
+ChatBot::ChatBot(ChatBot&& other)
+{
+  std::cout << "ChatBot Move Constructor" << std::endl;
+
+  _chatLogic = other._chatLogic;
+  _chatLogic->SetChatbotHandle(this);
+  other._chatLogic = nullptr;
+
+  _rootNode = other._rootNode;
+  other._rootNode = nullptr;
+
+  _image = other._image;
+  other._image = NULL;
+}
+
+ChatBot& ChatBot::operator=(const ChatBot& other)
+{
+  std::cout << "ChatBot Copy Assignment" << std::endl;
+
+  _chatLogic = other._chatLogic;
+  _rootNode = other._rootNode;
+
+  if(_image != NULL)
+  {
+    *_image = *other._image;
+  }  
+  
+  return *this;
+}
+
+ChatBot& ChatBot::operator=(ChatBot&& other)
+{
+  std::cout << "ChatBot Move Assignment" << std::endl;
+
+  _chatLogic = other._chatLogic;
+  _chatLogic->SetChatbotHandle(this);
+  other._chatLogic = nullptr;
+
+  _rootNode = other._rootNode;
+  other._rootNode = nullptr;
+
+  _image = other._image;
+  other._image = NULL;
+  
+  return *this;
+}
+
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {

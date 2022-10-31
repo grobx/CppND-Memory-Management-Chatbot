@@ -1,27 +1,18 @@
 #ifndef CHATLOGIC_H_
 #define CHATLOGIC_H_
 
+#include <memory>
 #include <vector>
 #include <string>
 #include "chatgui.h"
-
-// forward declarations
-class ChatBot;
-class GraphEdge;
-class GraphNode;
+#include "chatbot.h"
+#include "graphnode.h"
 
 class ChatLogic
 {
 private:
-    //// STUDENT CODE
-    ////
-
     // data handles (owned)
-    std::vector<GraphNode *> _nodes;
-    std::vector<GraphEdge *> _edges;
-
-    ////
-    //// EOF STUDENT CODE
+    std::vector<std::unique_ptr<GraphNode>> _nodes;
 
     // data handles (not owned)
     GraphNode *_currentNode;
@@ -36,10 +27,6 @@ private:
     void AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element);
 
 public:
-    // constructor / destructor
-    ChatLogic();
-    ~ChatLogic();
-
     // getter / setter
     void SetPanelDialogHandle(ChatBotPanelDialog *panelDialog);
     void SetChatbotHandle(ChatBot *chatbot);
