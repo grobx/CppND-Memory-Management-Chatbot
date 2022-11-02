@@ -44,62 +44,64 @@ ChatBot::~ChatBot()
 
 ChatBot::ChatBot(const ChatBot& other)
 {
-  std::cout << "ChatBot Copy Constructor" << std::endl;
+    std::cout << "ChatBot Copy Constructor" << std::endl;
 
-  _chatLogic = other._chatLogic;
-  _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
 
-  if(_image != NULL)
-  {
-    *_image = *other._image;
-  }
+    if(other._image != NULL)
+    {
+        _image = new wxBitmap();
+        *_image = *other._image;
+    }
 }
 
 ChatBot::ChatBot(ChatBot&& other)
 {
-  std::cout << "ChatBot Move Constructor" << std::endl;
+    std::cout << "ChatBot Move Constructor" << std::endl;
 
-  _chatLogic = other._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  other._chatLogic = nullptr;
+    _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    other._chatLogic = nullptr;
 
-  _rootNode = other._rootNode;
-  other._rootNode = nullptr;
+    _rootNode = other._rootNode;
+    other._rootNode = nullptr;
 
-  _image = other._image;
-  other._image = NULL;
+    _image = other._image;
+    other._image = NULL;
 }
 
 ChatBot& ChatBot::operator=(const ChatBot& other)
 {
-  std::cout << "ChatBot Copy Assignment" << std::endl;
+    std::cout << "ChatBot Copy Assignment" << std::endl;
 
-  _chatLogic = other._chatLogic;
-  _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
 
-  if(_image != NULL)
-  {
-    *_image = *other._image;
-  }  
-  
-  return *this;
+    if(other._image != NULL)
+    {
+        _image = new wxBitmap();
+        *_image = *other._image;
+    }
+
+    return *this;
 }
 
 ChatBot& ChatBot::operator=(ChatBot&& other)
 {
-  std::cout << "ChatBot Move Assignment" << std::endl;
+    std::cout << "ChatBot Move Assignment" << std::endl;
 
-  _chatLogic = other._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  other._chatLogic = nullptr;
+    _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    other._chatLogic = nullptr;
 
-  _rootNode = other._rootNode;
-  other._rootNode = nullptr;
+    _rootNode = other._rootNode;
+    other._rootNode = nullptr;
 
-  _image = other._image;
-  other._image = NULL;
-  
-  return *this;
+    _image = other._image;
+    other._image = NULL;
+
+    return *this;
 }
 
 
